@@ -3,6 +3,7 @@
 #[derive(Clone)]
 pub struct Pair(char, String);
 
+#[allow(dead_code)]
 impl Pair {
     pub fn new(c: char, s: String) -> Pair {
         Pair { 0: c, 1: s }
@@ -18,7 +19,7 @@ pub struct BST {
 // parent(index) = [(index - 1) / 2] if r != 0
 // left(index) = 2(index) + 1 if 2(index) + 1 <= size
 // right(index) = 2(index) + 2 if 2(index + 2) <= size
-
+#[allow(dead_code)]
 impl BST {
     pub fn new() -> BST {
         BST {
