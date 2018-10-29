@@ -1,0 +1,6 @@
+[package]
+name = "morse_code"
+version = "0.1.0"
+authors = ["KellanMebane <kellanmebane@gmail.com>"]
+
+[dependencies]
