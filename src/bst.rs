@@ -3,6 +3,15 @@
 #[derive(Clone)]
 pub struct Pair(char, String);
 
+impl Pair {
+    pub fn new(c: char, s: String) -> Pair {
+        Pair {
+            0: c,
+            1: s,
+        }
+    }
+}
+
 pub struct BST {
     size: usize,
     vec: Vec<Option<Pair>>, // vector of optional indeces containing
@@ -34,18 +43,23 @@ impl BST {
     }
 
     fn internal_insert(&mut self, index: usize, item: Pair) -> bool {
-        let mut pair;
+        let pair;
         {
             let x = self.vec[index].as_ref();
             let y = x.as_ref();
             pair = match y {
                 Some(value) => value.0,
                 None => 0 as char, // null I think lmao
-            }
+            };
+            //println!("we are index {}, our char is {}", index, pair);
         }
 
+        //println!("CHECK: we are index {}, our char is {}", index, pair);
+        // this means we have an unused index
+        // insert here
         if pair == 0 as char {
-            
+            self.vec[index] = Some(item);
+            return true;
         }
 
         if item.0 == pair {

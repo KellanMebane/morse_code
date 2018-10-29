@@ -1,5 +1,8 @@
 mod bst;
+use bst::*;
 
 fn main() {
-    println!("Hello, world! {}", 0 as char);
+    let mut bst = BST::new();
+    bst.insert(Pair::new('c', String::from("string")));
+    bst.insert(Pair::new('b', String::from("string")));
 }
