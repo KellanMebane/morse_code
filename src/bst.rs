@@ -49,6 +49,18 @@ impl BST {
         }
     }
 
+    fn get_string(&self, index: usize) -> String {
+        match self.vec[index].as_ref().as_ref() {
+            Some(value) => {
+                let x = (&value.1).to_string();
+                //"cool".to_string()
+                //println!("{}", x);
+                x
+            }
+            None => "".to_string(), // null I think lmao
+        }
+    }
+
     fn internal_insert(&mut self, index: usize, item: Pair) -> bool {
         let key = self.get_char(index);
 
@@ -88,7 +100,39 @@ impl BST {
         }
 
         self.internal_inorder((2 * index) + 1);
-        println!("{}", key);
         self.internal_inorder((2 * index) + 2);
+    }
+
+    pub fn search(&self, letter: char) -> String {
+        self.internal_search(0, letter)
+    }
+
+    fn internal_search(&self, index: usize, letter: char) -> String {
+        let key = self.get_char(index);
+        let x = self.get_string(index);
+
+        let item = Pair::new(letter, "".to_string());
+
+        // we can't find it
+        // return empty string
+        if key == 0 as char {
+            return item.1;
+        }
+
+        if item.0 == key {
+            return x;
+        } else if item.0 > key {
+            let mut new_index = 0;
+            if (2 * index) + 2 <= self.size {
+                new_index = (2 * index) + 2;
+            }
+            return self.internal_search(new_index, letter);
+        } else {
+            let mut new_index = 0;
+            if (2 * index) + 1 <= self.size {
+                new_index = (2 * index) + 1;
+            }
+            return self.internal_search(new_index, letter);
+        }
     }
 }

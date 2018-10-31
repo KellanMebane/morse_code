@@ -7,7 +7,8 @@ use std::io::BufReader;
 
 fn main() {
     let mut bst = BST::new();
-    let file = File::open("./src/res/morse.csv").expect("file not found");
+    let file = File::open("./src/res/morse.txt").expect("file not found");
+    let input = File::open("./src/res/message.txt").expect("file not found");
 
     for file_line in BufReader::new(file).lines() {
         let line = file_line.unwrap();
@@ -20,5 +21,22 @@ fn main() {
         }
     }
 
-    bst.inorder();
+    //bst.inorder();
+
+    for file_line in BufReader::new(input).lines() {
+        let line = file_line.unwrap().to_uppercase();
+        let str_vec: Vec<_> = line.chars().collect();
+        for letter in str_vec {
+            if letter != ' ' {
+                let morse = bst.search(letter);
+                //println!("{}{}", morse, if letter == ' ' { " " } else { "   " });
+                print!("{} ", morse);
+            }
+            else {
+                print!("   ");
+            }
+        }
+
+        println!("");
+    }
 }
